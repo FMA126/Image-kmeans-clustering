@@ -6,6 +6,8 @@ const _ = require('lodash');
 
 const ecluidDistance = distance.distanceFormula
 const rawPixelData = data.rawPixelData;
+const width = data.width;
+const height = data.height;
 const kmeans = k.kmeans;
 
 const initialKmeans = kmeans(4);
@@ -113,14 +115,16 @@ const clusterConvergence = (kSize, iterations) => {
     // console.log(kMeansList)
   }
 
-  // for (let i in clusters) {
-  //   console.log(clusters[i].average)
-  // }
+  for (let i in clusters) {
+    console.log(clusters[i].average)
+  }
   return clusters
 
 }
 
 module.exports = {
   clusterConvergence,
-  rawPixelData
+  rawPixelData,
+  width, 
+  height,
 }

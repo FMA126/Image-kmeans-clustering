@@ -4,8 +4,13 @@ const createPixelArray = pixel.createPixelArray;
 const decodeJPEG = decode.decodeJPEG;
 
 const decodedImage = decodeJPEG('media/fruit-salad.jpeg');
-const rawPixelData = createPixelArray(decodedImage);
+const rawPixelArray = createPixelArray(decodedImage);
+const rawPixelData = rawPixelArray[0];
+const width = rawPixelArray[1];
+const height = rawPixelArray[2]
 
 module.exports = {
-  rawPixelData
+  rawPixelData,
+  width,
+  height
 }

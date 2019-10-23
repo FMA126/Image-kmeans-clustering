@@ -5,16 +5,76 @@ const cluster = require('./bin/clusters');
 const data = require('./bin/rawPixelData');
 // const rawPixelData = data.rawPixelData;
 const clusterConvergence = cluster.clusterConvergence;
+const picWidth = cluster.width;
+const picHeight = cluster.height;
 
 const colorMap = () => {
     const rawPixelData = data.rawPixelData;
-    const clusterPixels = clusterConvergence(5, 100);
+    const clusterPixels = clusterConvergence(12, 200);
     const averageClusterColor = [];
+    const visColors = [
+        {
+            r: 255,
+            g: 0,
+            b: 0,
+        },
+        {
+            r: 0,
+            g: 255,
+            b: 0,
+        },
+        {
+            r: 0,
+            g: 0,
+            b: 255,
+        },
+        {
+            r: 255,
+            g: 255,
+            b: 0,
+        },
+        {
+            r: 0,
+            g: 255,
+            b: 255,
+        },
+        {
+            r: 255,
+            g: 0,
+            b: 255,
+        },
+        {
+            r: 235,
+            g: 64,
+            b: 52,
+        },
+        {
+            r: 190,
+            g: 209,
+            b: 42,
+        },
+        {
+            r: 20,
+            g: 20,
+            b: 20,
+        },
+        {
+            r: 255,
+            g: 255,
+            b: 255,
+        },
+        {
+            r: 252,
+            g: 0,
+            b: 67,
+        },
+
+    ]
 
     for (let k in clusterPixels) {
         // averageClusterColor.push(clusterPixels[curr].average);
         clusterPixels[k].forEach(curr => {
-            averageClusterColor[curr.pixel.number] = clusterPixels[k].average;
+            averageClusterColor[curr.pixel.number] = visColors[clusterPixels[k][0].pixel.shortestDist.n.k];
             averageClusterColor[curr.pixel.number].a = 255;
         })
     }
@@ -26,8 +86,6 @@ const rawColorMap = colorMap();
 
 const encodeJPEG = rawData => {
     // console.log(rawData.length)
-    const width = 225;
-    const height = 225;
 
     const frameData = [];
 
@@ -45,21 +103,21 @@ const encodeJPEG = rawData => {
 
     const rawImageData = {
         data: unit,
-        width: width,
-        height: height
+        width: picWidth,
+        height: picHeight
     };
 
-    console.log(rawImageData)
+    // console.log(rawImageData)
 
     const jpegImageData = jpeg.encode(rawImageData, 50)
 
-    console.log(jpegImageData)
+    // console.log(jpegImageData)
 
     return jpegImageData;
 }
 
 const writeFile = encodedPic => {
-    fs.writeFileSync('./media/processed-pic.jpeg', encodedPic.data, 'base64')
+    fs.writeFileSync(`./media/processed-pic-5-20-${Math.floor(Math.random() * 10000000)}.jpeg`, encodedPic.data, 'base64')
 }
 
 // console.log(encodeJPEG(rawColorMap))
