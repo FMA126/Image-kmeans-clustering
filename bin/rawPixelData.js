@@ -3,7 +3,7 @@ const decode = require('../lib/decodeJPEG');
 const createPixelArray = pixel.createPixelArray;
 const decodeJPEG = decode.decodeJPEG;
 
-const decodedImage = decodeJPEG('media/fruit-salad.jpeg');
+const decodedImage = decodeJPEG('media/highway.jpg');
 const rawPixelArray = createPixelArray(decodedImage);
 const rawPixelData = rawPixelArray[0];
 const width = rawPixelArray[1];

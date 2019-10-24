@@ -10,7 +10,7 @@ const picHeight = cluster.height;
 
 const colorMap = () => {
     const rawPixelData = data.rawPixelData;
-    const clusterPixels = clusterConvergence(12, 200);
+    const clusterPixels = clusterConvergence(12, 20);
     const averageClusterColor = [];
     const visColors = [
         {
